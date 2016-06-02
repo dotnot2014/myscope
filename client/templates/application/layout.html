@@ -1,0 +1,50 @@
+<!-- 页面框架模板 -->
+<template name="layout">
+  <div class="container">
+    {{> header}}
+    {{> errors}}
+    <div id="main" class="row-fluid">
+      {{> yield}}
+    </div>
+  </div>
+</template>
+
+<template name="header">
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{pathFor 'home'}}">Hack News</a>
+      </div>
+      <div class="collapse navbar-collapse" id="navigation">
+        <ul class="nav navbar-nav">
+          <li class="{{activeRouteClass 'home' 'newPosts'}}">
+            <a href="{{pathFor 'newPosts'}}">最新</a>
+          </li>
+          <li class="{{activeRouteClass  'bestPosts'}}">
+            <a href="{{pathFor 'bestPosts'}}">最热</a>
+          </li>
+          {{#if currentUser}}
+            <li>
+              <a href="{{pathFor 'postSubmit'}}">提交新闻</a>
+            </li>
+            <li class="dropdown">
+              {{> notifications}}
+            </li>
+          {{/if}}
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          {{> loginButtons}}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</template>
+
+
+
